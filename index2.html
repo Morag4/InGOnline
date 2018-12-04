@@ -1,0 +1,139 @@
+<?php
+  session_start();
+  require 'database.php';
+  if (isset($_SESSION['user_id'])) {
+    $records = $conn->prepare('SELECT id, email, password FROM users WHERE id = :id');
+    $records->bindParam(':id', $_SESSION['user_id']);
+    $records->execute();
+    $results = $records->fetch(PDO::FETCH_ASSOC);
+    $user = null;
+    if (count($results) > 0) {
+      $user = $results;
+    }
+  }
+?>
+
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8"
+  name="viewport" content="width=device-width, initial-scale=1">
+  <title>INGOnline</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+  </head>
+  <body>
+    <?php require 'partials/header.php' ?>
+
+    <?php if(!empty($user)): ?>
+      <br> Welcome. <?= $user['email']; ?>
+      <br>You are Successfully Logged In
+      <a href="logout.php">
+        Logout
+      </a>
+    <?php else: ?>
+      <h1>Please Login or SignUp</h1>
+
+      <a href="login.php">Login</a> or
+      <a href="signup.php">SignUp</a>
+    <?php endif; ?>
+  </body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	
+	 
+	
+</head>
+<body>
+	<center>
+	<div id="gen"> 	 
+	<table>
+  	<tr><th colspan="2">
+  		MINISTERIO DE EDUCACION. IN. "14 DE JULIO DE 1875"
+  	</th>
+  	</tr>
+  	<tr>  	
+    	<th>
+    <img src="images/ingo.jpg" border="1" alt="INGOnline" width="156" height="150">	
+    	</th>
+    <th>
+    	<button onclick="document.getElementById('id01').style.display='block'" style="width:100%;">Login</button>
+
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" action="regacadinicio.html">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="images/img_avatar2.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label for="uname"><b>Nombre de Usuario</b></label>
+      <input type="text" placeholder="Ingrese ID" name="uname" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Ingrese Password" name="psw" required>
+      <button type="submit">Entrar</button>
+      <label>
+        <input  type="checkbox" checked="checked" name="remember"> Recordarme
+      </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
+      <span class="psw">Olvidó su <a href="#">password?</a></span>
+    </div>
+  </form>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+    <!--<form>
+ 			<fieldset>
+ 				<legend>Usuarios Registrados</legend> 				
+ 				<table>
+ 					<tr>
+ 						<th>ID: </th>
+ 						<th><input a type="text" maxlength="10" size="10"></th> 
+ 					</tr>
+ 					<tr> </tr>
+ 					<tr>
+ 						<th>Clave: </th>
+ 						<th><input type="text" maxlength="8" size="10"></th>
+ 					</tr>
+  				 				  				
+  				</table>		
+  				<br>
+ 			</fieldset>
+		</form>-->
+			
+		</th>
+  	</tr>
+	</table>
+	<br>
+	<!--<button class="button" onclick="location.href='datper1.php'">Nuevo Ingreso</button> <br>-->
+	<button class="button" onclick="location.href='http://www.google.com'">Cancelar</button> 
+	<!---
+	</div>
+	<h1>Si desea Inscribirse para la matrícula 2019</h1>
+	<h1>Haga click en Nuevo Ingreso.</h1>-->
+
+</center>
+
+</body>
+</html>
